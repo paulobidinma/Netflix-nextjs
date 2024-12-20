@@ -9,9 +9,10 @@ import { redirect } from "next/navigation";
 
 export default async function SignUp() {
   const session = await getServerSession(authOptions);
-  if (session) {
-    return redirect("/home");
-  }
+
+  // Always redirect to /home regardless of session validation
+  redirect("/home");
+
   return (
     <div className="mt-24  rounded bg-black/80 py-10 px-6 md:mt-0 md:max-w-sm md:px-14">
       <form method="post" action="/api/auth/signin">
@@ -34,7 +35,7 @@ export default async function SignUp() {
       </form>
 
       <div className="text-gray-500 text-sm mt-2">
-        Alredy Have a account?{" "}
+        Already have an account?{" "}
         <Link className="text-white hover:underline" href="/login">
           Log in now!
         </Link>
